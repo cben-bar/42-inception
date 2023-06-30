@@ -11,7 +11,7 @@ RUN apt-get upgrade -y
 # INSTALL MARIADB SERVER
 RUN apt-get install -y mariadb-server
 
-# GIVE RIGHT TO MYSQL GROUP ON THE FILE
+# GIVE RIGHT TO MYSQL GROUP ON THE FILEsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN mkdir -p /var/run/mysql
 RUN chown -R mysql:mysql /var/run/mysql
 
