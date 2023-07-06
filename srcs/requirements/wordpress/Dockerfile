@@ -3,18 +3,22 @@ FROM debian:buster
 RUN 	apt-get update -y \
 &&		apt-get upgrade -y
 	
-# INSTALL Curl(Client url): hit an URL from our code
 RUN		apt-get install curl less -y
 
-# INSTALL PHP
 RUN		apt-get install -y php
 
 # INSTALL PHP-FPM (FastCgi process manager)
 	# protocol that define how my web server (nginx) communicates 
 	# with my CGI programm (php) about the received request
 RUN 	apt-get install -y php-fpm
+#	PHP-FPM (PHP FastCGI Process Manager) est un processus de gestion de processus PHP pour les serveurs web.
+#	Il sert de passerelle entre le serveur web (comme Apache ou Nginx) et l'interpréteur PHP.
+#	Il peut:	-précharger les scripts PHP en mémoire et maintenir un pool de processus prêts à traiter les requêtes,
+#				ce qui permet d'améliorer les performances globales.
+#				-soler et gérer des processus : PHP-FPM attribue un processus distinct à chaque demande PHP,
+#				assurant l'isolation entre les requêtes et évitant les problèmes de concurrence.
 
-# INSTALL MYSQL (old db driver) && MYSQLI (improved driver)
+
 RUN		apt-get install -y php-mysql \
 &&		apt-get install -y php-mysqli
 
