@@ -18,13 +18,13 @@ RUN apt-get install -y openssl
 	# 	keyout /etc/.../yourfile.key — specifies the location of the output .key file.
 	# 	out /etc/.../yourfile.crt — specifies the location of the output .crt file.
 RUN openssl req -x509 -newkey rsa:2048 -nodes -subj /C=FR \
-	-keyout /etc/ssl/dvallien.42.fr.key -out /etc/ssl/dvallien.42.fr.crt;
+	-keyout /etc/ssl/cben-bar.42.fr.key -out /etc/ssl/cben-bar.42.fr.crt;
 
 # NGINX CONFIGURATION FILE : Associate our SSL certificate to our conf file nginx
 	# 	copy file nginx.conf to /etc/nginx/sites-available
 	# 	ln -s is to create symboliq link btw sites available and sites enabled
-COPY	/conf/nginx.conf /etc/nginx/sites-available/dvallien.42.fr.conf
-RUN		ln -s /etc/nginx/sites-available/dvallien.42.fr.conf /etc/nginx/sites-enabled/dvallien.42.fr.conf
+COPY	/conf/nginx.conf /etc/nginx/sites-available/cben-bar.42.fr.conf
+RUN		ln -s /etc/nginx/sites-available/cben-bar.42.fr.conf /etc/nginx/sites-enabled/cben-bar.42.fr.conf
 
 EXPOSE 443 
 
@@ -35,3 +35,7 @@ ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 # The daemon off directive tells Nginx to stay in the foreground
 CMD ["nginx", "-g", "daemon off;"]	
+
+
+#	"ENTRYPOINT" remplace toute instruction "CMD" précédente.
+#	Si les 2 sont présentes l'instruction "CMD" sera utilisée pour fournir des arguments par défaut à l'instruction "ENTRYPOINT".
