@@ -48,8 +48,8 @@ EXPOSE 3306
 
 RUN apt-get install -y dumb-init
 #   Dumb-init est un processus d'initialisation conçu pour résoudre les problèmes liés à l'exécution de conteneurs Linux,
-#   améliorant ainsi la stabilité et la gestion des processus à l'intérieur des conteneurs
-#   (intercepte les signaux et les transmet aux processus enfants. Garantit que les processus enfants sont correctement terminés lorsque
+#   améliorant ainsi la stabilité et la gestion des processus à l'intérieur des conteneurs:
+#   (Intercepte les signaux et les transmet aux processus enfants. Garantit que les processus enfants sont correctement terminés lorsque
 #   le conteneur est arrêté. Fermeture des descripteurs de fichiers ouverts, gestion de la fin du processus principal, etc..).
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
