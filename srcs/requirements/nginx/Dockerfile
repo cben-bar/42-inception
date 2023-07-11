@@ -1,6 +1,6 @@
 FROM debian:buster
 
-# UPDATE UPGRADE SERVER PACKAGE | -y to accept all during installation
+# UPDATE/UPGRADE PACKAGE | -y to accept
 RUN apt-get update -y
 RUN apt-get upgrade -y
 
