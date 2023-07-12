@@ -1,41 +1,38 @@
 FROM debian:buster
 
-# UPDATE/UPGRADE PACKAGE | -y to accept
 RUN apt-get update -y
 RUN apt-get upgrade -y
 
-# INSTALL SERVER NGINX
 RUN apt-get install -y nginx
 
-# INSTALL OPENSSL TO GENERATE OUR KEY AND CERTIFICATE FILES
 RUN apt-get install -y openssl
 
-# GENERATE SSL KEY & CERTIFICATE
-	# 	req — to specify we want to use -x509
-	# 	x509 specify we want to create self-signed certificate
-	# 	nodes skip option to secure our certificate with passphrase so nginx can read it
-	# 	newrsa rsa:2048 — specifies that we want to generate both a new certificate and a new key with an RSA key of 2048 bits
-	# 	keyout /etc/.../yourfile.key — specifies the location of the output .key file.
-	# 	out /etc/.../yourfile.crt — specifies the location of the output .crt file.
 RUN openssl req -x509 -newkey rsa:2048 -nodes -subj /C=FR \
 	-keyout /etc/ssl/cben-bar.42.fr.key -out /etc/ssl/cben-bar.42.fr.crt;
+# 	req: génère des requêtes et certificats SSL.
+# 	-x509: génère un certificat auto-signé.
+# 	-newkey rsa:2048: la clé privée RSA de 2048 bits doit être générée pour le certificat.
+# 	nodes: indique de ne pas crypter la clé.
+#	-subj /C=FR: paramètre de la commande req qui indique que le pays.
 
-# NGINX CONFIGURATION FILE : Associate our SSL certificate to our conf file nginx
-	# 	copy file nginx.conf to /etc/nginx/sites-available
-	# 	ln -s is to create symboliq link btw sites available and sites enabled
+# 	-keyout /etc/...: paramètre de la commande req qui indique le chemin et le nom du fichier où la clé privée générée sera enregistrée.
+# 	out /etc/...: paramètre de la commande req qui indique le chemin et le nom du fichier où le certificat auto-signé sera enregistré.
+
+
 COPY	/conf/nginx.conf /etc/nginx/sites-available/cben-bar.42.fr.conf
 RUN		ln -s /etc/nginx/sites-available/cben-bar.42.fr.conf /etc/nginx/sites-enabled/cben-bar.42.fr.conf
+# 	copie le fichier file nginx.conf dans /etc/nginx/sites-available.
+# 	crée un lien symbolique entre sites available et sites enabled.
 
-EXPOSE 443 
+EXPOSE 443
 
-# INSTALL DUMB-INIT
 RUN apt-get install -y dumb-init
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+#	dunb-init: cf Dockerfile de mariadb.
+#	Définit le point d'entrée du conteneur.
 
-# The daemon off directive tells Nginx to stay in the foreground
 CMD ["nginx", "-g", "daemon off;"]	
-
 
 #	"ENTRYPOINT" remplace toute instruction "CMD" précédente.
 #	Si les 2 sont présentes l'instruction "CMD" sera utilisée pour fournir des arguments par défaut à l'instruction "ENTRYPOINT".
