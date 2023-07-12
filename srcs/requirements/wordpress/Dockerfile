@@ -15,7 +15,7 @@ RUN 	apt-get install -y php-fpm
 #	Il sert de passerelle entre le serveur web (comme Apache ou Nginx) et l'interpréteur PHP.
 #	Il peut:	-précharger les scripts PHP en mémoire et maintenir un pool de processus prêts à traiter les requêtes,
 #				ce qui permet d'améliorer les performances globales.
-#				-soler et gérer des processus : PHP-FPM attribue un processus distinct à chaque demande PHP,
+#				-isoler et gérer des processus : PHP-FPM attribue un processus distinct à chaque demande PHP,
 #				assurant l'isolation entre les requêtes et évitant les problèmes de concurrence.
 
 RUN		apt-get install -y php-mysql \
