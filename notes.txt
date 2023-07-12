@@ -13,3 +13,12 @@ l est important de noter que l'instruction "EXPOSE" dans le Dockerfile n'ouvre p
 depuis l'extérieur. Pour lier le port exposé du conteneur à un port spécifique de l'hôte, vous devez utiliser l'option "-p" lors de
 l'exécution de la commande "docker run". Par exemple, pour lier le port 3306 du conteneur au port 3306 de l'hôte, vous pouvez utiliser
 l'option "-p 3306:3306" lors de l'exécution de la commande "docker run".
+
+USER        PASSWORD
+        VM:
+beni        beni
+root        root
+
+        INCEPTION:
+cben-bar    cben-bar
+maurice     maurice
