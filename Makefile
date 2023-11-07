@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dvallien <dvallien@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/02 16:22:14 by dvallien          #+#    #+#              #
-#    Updated: 2022/12/13 14:21:23 by dvallien         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # -f : specify name and path of the compose file
 # -p : specify a project name
 DOCKER-COMPOSE := docker-compose -f srcs/docker-compose.yml
