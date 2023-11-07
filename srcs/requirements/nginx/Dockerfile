@@ -18,8 +18,9 @@ RUN openssl req -x509 -newkey rsa:2048 -nodes -subj /C=FR \
 # 	-keyout /etc/...: paramètre de la commande req qui indique le chemin et le nom du fichier où la clé privée générée sera enregistrée.
 # 	out /etc/...: paramètre de la commande req qui indique le chemin et le nom du fichier où le certificat auto-signé sera enregistré.
 
+RUN		rm -rf /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
 
-COPY	/conf/nginx.conf /etc/nginx/sites-available/cben-bar.42.fr.conf
+COPY	/conf/nginx.conf /etc/nginx/sites-available/cben-bar.42.fr.con
 RUN		ln -s /etc/nginx/sites-available/cben-bar.42.fr.conf /etc/nginx/sites-enabled/cben-bar.42.fr.conf
 # 	copie le fichier file nginx.conf dans /etc/nginx/sites-available.
 # 	crée un lien symbolique entre sites available et sites enabled.
